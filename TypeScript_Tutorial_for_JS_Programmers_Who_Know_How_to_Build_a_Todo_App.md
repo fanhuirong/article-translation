@@ -10,13 +10,13 @@
 ## 通过构建Todo应用来学习TypeScript
 
 在2011年，Backbone.js是最流行的JavaScript库之一（React在2013年问世；Vue在2014年）。
-当人们在学习Backbone.js时，许多人（包括我自己）是通过构建一个todo应用来学习的。官方文档包括一个用Backbone.js构建的todo应用实例，许多人通过阅读其精美的注释源代码来学习。
+当人们在学习Backbone.js时，许多人（包括我自己）是通过构建一个`todo`应用来学习的。官方文档包括一个用Backbone.js构建的`todo`应用实例，许多人通过阅读其精美的注释源代码来学习。
 
-在当时，通过建立一个todo应用程序来学习一个JavaScript库是一个新的想法，并由Backbone.js（以及随后的其他库）推广开来。它启发了TodoMVC，它展示了使用不同JS库构建的todo应用。今天，许多教程，如Redux的官方教程，都涉及到构建一个todo应用程序。
+在当时，通过建立一个`todo`应用程序来学习一个JavaScript库是一个新的想法，并由Backbone.js（以及随后的其他库）推广开来。它启发了`TodoMVC`，它展示了使用不同JS库构建的todo应用。今天，许多教程，如Redux的官方教程，都涉及到构建一个`todo`应用程序。
 
-但TypeScript教程呢？谈到TypeScript，涉及构建todo应用的教程并不多，我认为这错过了很多机会。构建一个todo应用是学习前端的一个好方法，许多JS程序员已经知道如何构建一个todo应用，因此应该有更多以todo应用为特色的TypeScript教程。
+但TypeScript教程呢？谈到TypeScript，涉及构建`todo`应用的教程并不多，我认为这错过了很多机会。构建一个`todo`应用是学习前端的一个好方法，许多JS程序员已经知道如何构建一个`todo`应用，因此应该有更多以todo应用为特色的TypeScript教程。
 
-在本教程中，我将通过下图所示的一个示例todo应用来教授TypeScript的一些有趣部分。
+在本教程中，我将通过下图所示的一个示例`todo`应用来教授TypeScript的一些有趣部分。
 
 ![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/365356911fe94f99a92d3e75b9b84233~tplv-k3u1fbpfcp-watermark.image?)
 
@@ -492,11 +492,11 @@ type CompletedTodo = Todo & {
 
 ### 2.5 最终实现 completeAll()
 
-我们终于准备好实现 `completeAll()`了。下面是代码--试着按下 **【Compile】**按钮 !**（注：请进入原文进行操作）**
+我们终于准备好实现 `completeAll()`了。下面是代码--试着按下 **【Compile】** 按钮 ! **（注：请进入原文进行操作）**
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b4f2a350cd974e5d97bb3a6462fc378f~tplv-k3u1fbpfcp-watermark.image?)
 
-它已经成功编译了! 让我们在一个示例的todo列表上运行这个函数。按下 **【Run】**按钮 **（注：请进入原文进行操作）**
+它已经成功编译了! 让我们在一个示例的todo列表上运行这个函数。按下 **【Run】** 按钮 **（注：请进入原文进行操作）**
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e2338265aaf84876ac064e5305749a7c~tplv-k3u1fbpfcp-watermark.image?)
 正如预期的那样，`done`都变成了 `true`。
@@ -518,3 +518,224 @@ type CompletedTodo = Todo & {
 3. 最后，我们了解到，我们可以使用**交叉类型**来覆盖一些属性，用来消除重复的代码。
 
 在下一节（也是最后一节），我们将看一下TypeScript最强大的功能之一，**联合类型**`Unions`。
+
+## Section3 联合类型和可选属性（Union Types and Optional Properties）
+
+让我们为我们的todo应用程序添加一个新功能位置标签。
+
+每个待办事项现在都可以选择用以下预定义的标签之一来标记。
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/38993c8712224103ad5d90b1c1f75f63~tplv-k3u1fbpfcp-watermark.image?)
+每个待办事项也可以用自定义的、用户定义的标签来标记。
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/945b074b78a84e689211e7af53f0a97b~tplv-k3u1fbpfcp-watermark.image?)
+
+用户可以创建任何他们想要的自定义地点标签。
+
+用户可以使用这一功能来确定哪些任务需要在家里、在工作场所或其他地方完成。它是**可选的**，所以可以有一个没有地点标签的todo项目。
+
+下面是一个例子。
+
+![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0174bf2240c643bc86828cc06c043656~tplv-k3u1fbpfcp-watermark.image?)
+
+让我们看一下相关的数据。每个todo现在可以有一个可选的place属性，它决定了place标签。
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4a40c270fa2945cc8cedbc0b39e44215~tplv-k3u1fbpfcp-watermark.image?)
+
+对于自定义地点，地点属性将是一个包含字符串自定义属性的对象。
+
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e4c1f12a84684abc9fdccbb279fff9d1~tplv-k3u1fbpfcp-watermark.image?)
+
+如果没有地方标签，地方属性也可以没有。
+
+下面是我们前面例子的相关数据。
+
+```ts
+
+[
+  {
+    id: 1,
+    text: 'Do laundry',
+    done: false,
+    place: 'home'
+  },
+  {
+    id: 2,
+    text: 'Email boss',
+    done: false,
+    place: 'work'
+  },
+  {
+    id: 3,
+    text: 'Go to gym',
+    done: false,
+    place: { custom: 'Gym' }
+  },
+  {
+    id: 4,
+    text: 'Buy milk',
+    done: false,
+    place: { custom: 'Supermarket' }
+  },
+  { id: 5, text: 'Read a book', done: false }
+]
+
+```
+
+为了在TypeScript中实现这一点，我们首先需要更新我们对Todo类型的定义。让我们接下来看看这个吧。
+
+### 3.1 联合类型
+
+为了实现位置标签，我们可以使用TypeScript的一个功能，即联合类型。
+
+在TypeScript中，你可以使用语法`A | B`来创建一个联合类型，它表示一个类型是A或B。
+
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e91fd479ca4d4c76bd8656639456c32a~tplv-k3u1fbpfcp-watermark.image?)
+
+例如，如果你创建一个等于 `number|string` 的类型，它可以是数字或字符串。
+
+```ts
+// Creates a union type of number and string
+type Foo = number | string
+// You can assign either a number or a string
+// variable to Foo. So these will both compile:
+const a: Foo = 1
+const b: Foo = 'hello'
+```
+
+在我们的todo应用程序中，我们将首先创建一个新的Place类型，作为一个联合类型，如下所示。
+
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c691c625cfbb49adb83518ac1ab45150~tplv-k3u1fbpfcp-watermark.image?)
+
+下面是一个使用`Place`类型的例子。
+
+```ts
+type Place = 'home' | 'work' | { custom: string }
+// They all compile
+const place1: Place = 'home'
+const place2: Place = 'work'
+const place3: Place = { custom: 'Gym' }
+const place4: Place = { custom: 'Supermarket' }
+```
+
+我们现在可以把`Place`类型分配给Todo的地点属性。
+
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/652f9c0fe11c4fe99c436d47bf22afc1~tplv-k3u1fbpfcp-watermark.image?)
+
+### 3.2 可选属性
+
+我们前面简单地提到，像家或工作这样的地点标签是可选的--我们可以有没有地点标签的todo项目。
+
+在我们之前的例子中，"读一本书 "没有任何地点标签，所以它没有任何地点属性。
+
+TypeScript 能否描述这些可选属性？当然可以。在TypeScript中，你可以在属性名称后面添加一个问号(**`?`**)来使该属性成为`可选项`。
+
+```ts
+type Foo = {
+    // bar is an optional property because of "?"
+    bar?: number
+}
+
+// These will both compile:
+// bar can be present or missing
+const a: Foo = {}
+const b: Foo = { bar: 1 }
+```
+
+在我们的例子中，不使用`place: Place`，我们可以使用`place?: Place`来使其成为可选项。
+
+```ts
+type Place = 'home' | 'work' | { custom: string }
+type Todo = Readonly<{
+  id: number
+  text: string
+  done: boolean
+  // place is optional
+  place?: Place
+}>
+
+```
+
+现在，我们准备在一个函数中使用这些类型。
+
+### 3.3 实现`placeToString()`
+
+正如上文所说，React或Vue等UI库将数据转化为UI。
+
+对于地方标签，我们需要将每个地方的数据转化为地方标签用户界面。
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0d9c764fc4e340c69a1319342de910eb~tplv-k3u1fbpfcp-watermark.image?)
+
+要做到这一点，我们想实现一个叫做`placeToString()`的函数，它的输入和输出如下。
+
+输入应该是一个地方。例如：`'work'`。
+返回值应该是一个字符串（有一个表情符号），将用于标签用户界面。
+下面是一些例子。
+
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6b58589186c74d6db7fca897e248ac09~tplv-k3u1fbpfcp-watermark.image?)
+
+然后，我们可以使用它的返回值来渲染地方标签UI： 家庭、工作、健身房等等登封。例如，在React中，你可以定义一个功能组件并在其中调用`placeToString()`。
+
+现在让我们来实现`placeToString()`。下面是启动代码--你能弄清楚里面的内容吗？
+
+```ts
+function placeToString(place: Place): string {
+// Takes a Place and returns a string
+// that can be used for the place label UI
+}
+```
+
+### 3.4 小黄鸭的实现
+
+**（注：请进入原文进行操作）**
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b6bf8c3ba2f3403ca50ce00888a62e69~tplv-k3u1fbpfcp-watermark.image?)
+
+编译失败了! TypeScript注意到，这里有一个逻辑错误。具体来说，在else里面，TypeScript知道`place`是`'work'`或者`{ custom: string }`。
+
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3acfce9f98494f7cb4fa4911f0a80f7f~tplv-k3u1fbpfcp-watermark.image?)
+
+情况是这样的。
+
+**在else里面**，`place`不是`'work'`就是`{ custom: string }`。
+而`place.custom`在`place`为`'work'`时是无效的。这就是为什么TypeScript给了你一个编译错误。
+
+![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/386344ac7a9b4045b00c3c7d12b0f9c9~tplv-k3u1fbpfcp-watermark.image?)
+
+当然，修复方法是添加`else if (place === 'work')`。
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6ea422d10c3a4c91a4250ce9a78377a3~tplv-k3u1fbpfcp-watermark.image?)
+不用担心，小黄鸭! TypeScript能够及早发现这个错误。
+
+**摘要**：正如我们刚才所看到的，联合类型在与条件语句（如`if/else`）结合时很强大：
+
+* 如果我们有一个联合类型的变量（比如说`place`）...
+* 并在`if/else`中检查其值...
+* 那么TypeScript就会对变量在`if/else`的每个分支的可能值进行智能处理。
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/abd57c2ef8764ea4ab09274e03fc2954~tplv-k3u1fbpfcp-watermark.image?)
+
+这就是全部! 让我们快速总结一下我们所学到的东西。
+
+### 3.5 section3 小结
+
+在本节中，我们已经了解了`联合类型`和`可选属性`。
+
+**1. 我们可以使用语法`A | B`来创建一个联合类型，它表示一个要么是A要么是B的类型。**
+**2. 我们可以在属性名称后面添加一个问号（`？`），使该属性成为可选属性。**
+
+最后，当联合类型与条件语句（如**if/else**）相结合时，其功能非常强大。
+
+如果我们有一个联合类型的变量（例如：place）...
+并在`if/else`中检查其值...
+那么TypeScript就会对变量在`if/else`的每个分支的可能值进行智能处理。
+
+联合类型是TypeScript的最佳理念之一。你应该经常使用它们。
+
+联合类型还有其他强大的功能（区分的联合，将它们与映射类型相结合，等等），我不会在这里介绍。
+
+## 4. 结论和下一步
+
+谢谢你的阅读! 现在你应该知道足够的TypeScript知识，可以开始做一个项目了。
+
+* 如果你正在使用React，[React+TypeScript Cheatsheets](https://github.com/typescript-cheatsheets/react)是一个很好的参考。
+* 接下来要学习的内容：一旦你对TypeScript更加熟悉，接下来你应该学习**泛型**。我写了一篇文章，叫做 [TypeScript Generics for People Who Gave Up on Understanding Generics](https://ts.chibicode.com/generics/)。
