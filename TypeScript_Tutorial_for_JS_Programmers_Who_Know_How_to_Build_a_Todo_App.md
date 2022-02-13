@@ -3,9 +3,9 @@
 > 原文链接： <https://ts.chibicode.com/todo>
 
 > 作者的话：
-> 我写教程是为了帮助初级程序员学习TypeScript。我的教程可能对有经验的程序员不那么有用。
+> 我的教程是为了帮助初级程序员学习TypeScript，可能对有经验的程序员不那么有用。
 >
-> 为什么要针对初级程序员？随着 TypeScript 的普及，越来越多的初级程序员将学习它。然而，我注意到许多现有的教程对初级程序员并不那么友好，因此，我尝试提供一个更友好的学习方案。
+> 为什么要针对初级程序员？随着 TypeScript 的普及，越来越多的初级程序员将学习和使用它。然而，我注意到许多现有的教程对初级程序员并不那么友好，因此，我尝试着写一个更友好的学习教程。
 
 ## 通过构建Todo应用来学习TypeScript
 
@@ -26,12 +26,12 @@
 
 * 为了节省时间，我不打算谈论如何设置TypeScript项目--你应该阅读其他教程。对于React，请查看[React+TypeScript Cheatsheets](https://github.com/typescript-cheatsheets/react)。
 
-* 同时为了节省时间，我只介绍TypeScript中最基本的概念。我的目标不是要面面俱到，而是要让你想要学习更多。
+* 同时为了节省时间，我只介绍TypeScript中最基本的概念。我的目标不是要面面俱到，而是要让你想要去学习更多相关知识。
 
 这篇文章总共有3个部分。以下是每一节所涵盖的主题。
 
 第1节：类型、只读属性和映射类型\
-第2节：数组类型、字面类型和交叉类型\
+第2节：数组类型、字面量类型和交叉类型\
 第3节：联合类型和可选属性\
 让我们开始吧!
 
@@ -39,7 +39,7 @@
 
 ### 1.1 将数据转化为用户界面
 
-让我们先来看看数据。像React或Vue这样的UI库本质上所做的是将数据转化为UI。例如，在React中，你把数据指定为道具或状态，它就会根据这些数据渲染出UI。
+让我们先来看看数据。像React或Vue这样的UI库本质上所做的事情是将数据转化为UI。例如，在React中，你把数据指定为道具或状态，它就会根据这些数据渲染出UI。
 
 ![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fb4275e2e81146878131de29522669b1~tplv-k3u1fbpfcp-watermark.image?)
 
@@ -62,13 +62,13 @@
 
 * `id`是每个todo项目的ID。这通常是由后端数据库生成的。
 * `text`包含每个todo项目的文本。
-* 最重要的是，完成的项目为真，否则为假。
+* 最重要的是，完成的项目状态为真，否则为假。
 
 让我们把这个应用程序和它的相关数据一起显示出来。试着勾选和不勾选每个复选框，并看看做了什么变化。**（注：请进入原文进行操作）**
 
 ![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/be1bb55deb2c435dadfd377ee27a67c8~tplv-k3u1fbpfcp-watermark.image?)
 
-正如你所看到的，当你检查/取消检查一个复选框时，它会更新底层数据（`done`的属性），反过来，用户界面也会被更新。这就是React和Vue等UI库的工作方式。
+正如你所看到的，当你`check`/`uncheck`一个复选框时，它会更新底层数据（`done`的属性），反过来，用户界面也会被更新。这就是React和Vue等UI库的工作方式。
 
 接下来，让我们看看数据如何被更新。
 
@@ -108,11 +108,11 @@ function toggleTodo(todo) {
 }
 ```
 
-让我们检查一下小鸭子的实现是否正确。看一下下面的测试案例。你认为输出会是什么？先试着猜一下，然后按下下面的运行按钮。**（注：请进入原文进行操作）**
+让我们检查一下小黄鸭的实现是否正确。看一下下面的测试案例。你认为输出会是什么？先试着猜一下，然后按下下面的运行按钮。**（注：请进入原文进行操作）**
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/249cfd6c25a1458fbbd539a606e1f8dc~tplv-k3u1fbpfcp-watermark.image?)
 
-`done`属性正确的变成了假的，但它缺少`id`属性。所以小黄鸭的实现是不正确的。
+`done`属性正确的变成了`false`，但它缺少`id`属性。所以小黄鸭的实现是不正确的。
 
 正确的实现:
 
@@ -149,9 +149,9 @@ type Todo = {
 
 ![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bbd04f778c744f10bdc06eccada1f7f8~tplv-k3u1fbpfcp-watermark.image?)
 
-它成功地编译了，因为foo的类型与Todo的类型相符。
+它编译成功了，因为foo的类型与Todo的类型相符。
 
-现在，下面这个例子怎么样呢？
+现在，下面这个例子会怎样呢？
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fd2e80bd140d42848d2f9b7dd30fd49f~tplv-k3u1fbpfcp-watermark.image?)
 
@@ -161,7 +161,7 @@ TypeScript能够让你根据指定的类型对变量进行类型检查，这有�
 
 ### 1.4 在toggleTodo()中使用TypeScript
 
-现在，让我们用TypeScript来防止小黄鸭犯的错误。回顾一下，这里是我们之前创建的Todo类型（id是必须的）。
+现在，让我们用TypeScript来防止小黄鸭犯错误。回顾一下，这里是我们之前创建的Todo类型（id是必须的）。
 
 ```ts
 type Todo = {
@@ -232,7 +232,7 @@ type Todo = {
 
 编译失败! 这是因为`done`被定义为一个只读属性，而TypeScript阻止你更新只读属性。
 
-我们再次看到，TypeScript可以防止小黄鸭所犯的错误。
+我们再次看到，TypeScript可以防止小黄鸭犯错误。
 
 顺便说一下，我们先前使用的实现将继续工作，因为它没有修改输入的todo项目。
 
@@ -302,7 +302,7 @@ type ReadonlyFoo = Readonly<Foo>
 1. 我们可以定义一个类型以确保一个函数的输入和输出是正确的类型。
 2. 我们可以使用`readonly`关键字来确保一个对象的属性不被修改。
 
-在JavaScript中，你需要写单元测试来测试这些东西。但TypeScript可以自动检查它们。所以在某种意义上，TypeScript的类型就像轻量级的单元测试，在你每次保存（编译）代码的时候都会运行。(当然，这个比喻是简化的。你还是应该用TypeScript写测试！)
+在JavaScript中，你需要写单元测试来测试这些东西，但TypeScript可以自动检查它们。所以在某种意义上，TypeScript的类型就像轻量级的单元测试，在你每次保存（编译）代码的时候都会运行。(当然，这个比喻是简化的。你还是应该用TypeScript写测试！)
 
 当你使用一个UI库并需要转换数据时，这一点特别有用。例如，如果你使用React，你将需要在状态更新中转换数据。当你把数据从一个父组件传递给它的子组件时，你也可能需要转换数据。TypeScript可以减少这些情况下产生的bug。
 
@@ -534,7 +534,7 @@ type CompletedTodo = Todo & {
 
 用户可以使用这一功能来确定哪些任务需要在家里、在工作场所或其他地方完成。它是**可选的**，所以可以有一个没有地点标签的todo项目。
 
-下面是一个例子。
+下面是一个示例：
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0174bf2240c643bc86828cc06c043656~tplv-k3u1fbpfcp-watermark.image?)
 
@@ -546,7 +546,7 @@ type CompletedTodo = Todo & {
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e4c1f12a84684abc9fdccbb279fff9d1~tplv-k3u1fbpfcp-watermark.image?)
 
-如果没有地方标签，地方属性也可以没有。
+如果一个项目没有地方标签，那么地方属性也可以没有。
 
 下面是我们前面例子的相关数据。
 
@@ -670,11 +670,11 @@ type Todo = Readonly<{
 
 输入应该是一个地方。例如：`'work'`。
 返回值应该是一个字符串（有一个表情符号），将用于标签用户界面。
-下面是一些例子。
+下面是示例。
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6b58589186c74d6db7fca897e248ac09~tplv-k3u1fbpfcp-watermark.image?)
 
-然后，我们可以使用它的返回值来渲染地方标签UI： 家庭、工作、健身房等等登封。例如，在React中，你可以定义一个功能组件并在其中调用`placeToString()`。
+然后，我们可以使用它的返回值来渲染地方标签UI： 家庭、工作、健身房等等地方。例如，在React中，你可以定义一个功能组件并在其中调用`placeToString()`。
 
 现在让我们来实现`placeToString()`。下面是启动代码--你能弄清楚里面的内容吗？
 
