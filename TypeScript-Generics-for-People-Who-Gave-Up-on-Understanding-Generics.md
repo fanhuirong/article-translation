@@ -279,3 +279,188 @@ genericFunc()
 ```
 
 泛型并不可怕。**它们就像普通的函数参数，但它处理的是类型，而不是值**。如果你理解了这么多，你就可以继续看下去了！
+
+### 10. 让我们谈谈 `makePair`
+
+让我们来看看新的函数`makePair()`，它类似于`makeState()`，但它不是存储一个单一的值，而是存储一对值，如`{ first: ? ， second: ? }`， 现在，它只支持数字。
+
+```ts
+function makePair() {
+// Stores a pair of values
+let pair: { first: number; second: number }
+function getPair() {
+    return pair
+}
+
+// Stores x as first and y as second
+function setPair(x: number, y: number) {
+    pair = {
+        first: x,
+        second: y
+    }
+}
+return { getPair, setPair }
+}
+```
+
+让我们试试吧! 当你运行下面的代码时，控制台会打印出什么？先试着猜一下，然后按下运行按钮。 **（注：请进入原文进行操作）**
+
+![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c97ecc78a2ec40678b7f3b7523a8fb2d~tplv-k3u1fbpfcp-watermark.image?)
+
+现在，就像我们对`makeState()`所做的那样，让我们把`makePair()`变成一个通用函数。
+
+### 11. 泛型`makePair`
+
+这里有一个泛型版本的makePair。
+
+* 它需要两个类型参数`F`和`S`（代表 “F”irst 和 “S”econd）。
+* 第一个的类型将是`F`。
+* 第二个的类型将是`S`。
+
+```ts
+function makePair<F, S>() {
+let pair: { first: F; second: S }
+
+function getPair() {
+    return pair
+}
+
+function setPair(x: F, y: S) {
+    pair = {
+        first: x,
+        second: y
+    }
+}
+return { getPair, setPair }
+}
+```
+
+这里有一个用法的例子。调用`makePair`并且传入`<number, string>`，它要求第一个参数类型是数字，第二个参数类型是字符串。
+
+```ts
+// Creates a (number, string) pair
+const { getPair, setPair } = makePair<
+    number,
+    string
+>()
+// Must pass (number, string)
+setPair(1, 'hello')
+```
+
+总而言之，你可以创建一个接受多个类型参数的通用函数。
+
+```ts
+// makeState() has 1 type parameter
+function makeState<S>()
+
+// makePair() has 2 type parameters
+function makePair<F, S>()
+```
+
+当然，你也可以像以前一样使用`extends`关键字或`默认类型`。
+
+```ts
+
+function makePair<
+  F extends number | string = number,
+  S extends number | string = number
+>()
+
+```
+
+你甚至可以让第二种类型（`S`）与第一种类型（`F`）相关。这里有一个例子。
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b89dbc64762440e3bf389aee88cba25f~tplv-k3u1fbpfcp-watermark.image?)
+
+### 11. 泛型接口（Generic interfaces）和类型别名（type aliases）
+
+让我们回到我们之前的`makePair()`的实现。现在，看一下正确的类型。
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ee13aa48579140dd962e1a5019f9a893~tplv-k3u1fbpfcp-watermark.image?)
+
+上面的代码可以按原样工作，但如果我们想的话，我们可以把`{ first: F, second: S }`变成一个**接口**或**类型别名**，这样它就可以被重用了。
+
+让我们首先把配对的类型提取到一个泛型接口中。我将使用`A`和`B`作为类型参数名，以区别于`makePair()`的类型参数。
+
+```ts
+// Extract into a generic interface
+// to make it reusable
+interface Pair<A, B> {
+    first: A
+    second: B
+}
+```
+
+然后我们可以使用这个接口来声明类型。
+
+```ts
+function makePair<F, S>() {
+    // Usage: Pass F for A and S for B
+    let pair: Pair<F, S>
+    // ...
+}
+```
+
+通过提取到一个**泛型接口**（一个接受类型参数的接口），我们可以在必要时在其他地方重新使用它。
+
+或者，我们也可以把它提取到一个通用**类型别名**中。对于对象类型，类型别名基本上与接口相同，所以你可以使用你喜欢的任何一种。
+
+```ts
+// Extract into a generic type alias. It’s
+// basically identical to using an interface
+type Pair<A, B> = {
+    first: A
+    second: B
+}
+```
+
+总而言之，你可以创建通用接口和类型别名，就像你可以创建泛型函数一样。
+
+**附注**
+要了解更多关于接口和类型别名的信息，请阅读StackOverflow的答案[StackOverflow answer](https://stackoverflow.com/a/52682220/114157)。从TypeScript 3.7开始，它增加了对递归类型别名的支持，类型别名可以涵盖接口的几乎所有使用情况。[support for recursive type aliases](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html)
+
+### 13. 泛型类
+
+我们要讲的最后一个是泛型类。首先，让我们重温一下makeState()的代码。这是不使用扩展或泛型类型参数的通用版本。
+
+```ts
+function makeState<S>() {
+  let state: S
+  function getState() {
+    return state
+  }
+  function setState(x: S) {
+    state = x
+  }
+  return { getState, setState }
+}
+```
+
+我们可以把makeState()变成一个叫做State的泛型类，如下列代码。它看起来与`makeState()`相似，对吗？
+
+```ts
+class State<S> {
+    state: S
+    getState() {
+        return this.state
+    }
+    setState(x: S) {
+        this.state = x
+    }
+}
+```
+
+要使用泛型类，只需要在初始化的时候传入一个类型参数。
+
+```ts
+// Pass a type parameter on initialization
+const numState = new State<number>()
+numState.setState(1)
+// Prints 1
+console.log(numState.getState())
+```
+
+总而言之，**泛型类就像泛型函数一样**。泛型函数在我们**调用它**时需要一个类型参数，但泛型类在我们**实例化**它时需要一个类型参数。
+
+**附注**
+你需要在TypeScript配置（tsconfig.json）上设置`"strictPropertyInitialization"：false`，以使上述代码能够编译。
