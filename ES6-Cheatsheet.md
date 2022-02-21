@@ -8,8 +8,8 @@
 
 ## 目录
 
-- [`var` 与 `let/const`](#`var`与`let/const`)
-- [R使用代码块代替立即执行函数（Replacing IIFEs with Blocks）](#使用代码块代替立即执行函数（Replacing IIFEs with Blocks）)
+- [`var`与`let/const`](#`var`与`let/const`)
+- [使用代码块代替立即执行函数](#使用代码块代替立即执行函数)
 - [箭头函数](#箭头函数)
 - [Strings](#strings)
 - [Destructuring](#destructuring)
@@ -75,7 +75,9 @@ let x = 'hi';
 
 <sup>[(回到目录)](#目录)</sup>
 
-## 使用代码块代替立即执行函数（Replacing IIFEs with Blocks）
+## 使用代码块代替立即执行函数
+
+**Replacing IIFEs with Blocks**
 
 > **立即执行函数（IIFE）**的一个常见用法是确保变量在对应的函数范围内。ES6支持块级作用域，因此我们不再局限于函数作用域。
 
