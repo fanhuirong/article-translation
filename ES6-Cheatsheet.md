@@ -8,11 +8,11 @@
 
 ## 目录
 
-- [`var`与`let/const`](#`var`与`let/const`)
+- [`var`与`let/const`](#var与let/const)
 - [使用代码块代替立即执行函数](#使用代码块代替立即执行函数)
 - [箭头函数](#箭头函数)
-- [Strings](#strings)
-- [Destructuring](#destructuring)
+- [字符串](#strings)
+- [解构](#destructuring)
 - [Modules](#modules)
 - [Parameters](#parameters)
 - [Classes](#classes)
@@ -25,7 +25,7 @@
 - [Getter/Setter functions](#getter-and-setter-functions)
 - [License](#license)
 
-## `var`与`let/const`
+## var与let/const
 
 > 除了`var`，我们现在可以使用两个新的标识符-`let`和`const`来存储数值。与`var` 不同的是，`let`和`const`语句不会造成变量的声明提升。
 
@@ -79,7 +79,7 @@ let x = 'hi';
 
 **Replacing IIFEs with Blocks**
 
-> **立即执行函数（IIFE）**的一个常见用法是确保变量在对应的函数范围内。ES6支持块级作用域，因此我们不再局限于函数作用域。
+> **立即执行函数（IIFE）** 的一个常见用法是确保变量在对应的函数范围内。ES6支持块级作用域，因此我们不再局限于函数作用域。
 
 ```javascript
 (function () {
@@ -191,9 +191,7 @@ const squares = arr.map(x => x * x); // Arrow Function for terser implementation
 
 ## Strings
 
-With ES6, the standard library has grown immensely. Along with these changes
-are new methods which can be used on strings, such as `.includes()` and
-`.repeat()`.
+在ES6中，标准库得到了极大的发展。出现了一些可用于字符串的新方法，如`.includes()`和`.repeat()`。
 
 ### .includes( )
 
@@ -204,8 +202,7 @@ var substring = 'foo';
 console.log(string.indexOf(substring) > -1);
 ```
 
-Instead of checking for a return value `> -1` to denote string containment,
-we can simply use `.includes()` which will return a boolean:
+我们可以简单地使用`.includes()`返回一个布尔值来检查一个字符串的包含性，而不是检查返回值是否`>-1`。
 
 ```javascript
 const string = 'food';
@@ -226,7 +223,7 @@ function repeat(string, count) {
 }
 ```
 
-In ES6, we now have access to a terser implementation:
+在`ES6`中，我们现在可以获得更简单的实现。
 
 ```javascript
 // String.repeat(numberOfRepetitions)
@@ -235,8 +232,7 @@ In ES6, we now have access to a terser implementation:
 
 ### Template Literals
 
-Using **Template Literals**, we can now construct strings that have special
-characters in them without needing to escape them explicitly.
+使用 **模板字面量** ，我们现在可以直接构建包含特殊字符的字符串，而不需要转义它们。
 
 ```javascript
 var text = "This string contains \"double quotes\" which are escaped.";
@@ -249,6 +245,8 @@ let text = `This string contains "double quotes" which don't need to be escaped 
 **Template Literals** also support interpolation, which makes the task of
 concatenating strings and values:
 
+**模板字面量** 也支持插入变量值，这使得串联字符串和变量值的任务变得简单。
+
 ```javascript
 var name = 'Tiger';
 var age = 13;
@@ -256,7 +254,7 @@ var age = 13;
 console.log('My cat is named ' + name + ' and is ' + age + ' years old.');
 ```
 
-Much simpler:
+更简单的版本：
 
 ```javascript
 const name = 'Tiger';
@@ -265,7 +263,7 @@ const age = 13;
 console.log(`My cat is named ${name} and is ${age} years old.`);
 ```
 
-In ES5, we handled new lines as follows:
+在ES5中，我们使用如下方式处理换行的文本：
 
 ```javascript
 var text = (
@@ -275,7 +273,7 @@ var text = (
 );
 ```
 
-Or:
+或:
 
 ```javascript
 var text = [
@@ -285,8 +283,7 @@ var text = [
 ].join('\n');
 ```
 
-**Template Literals** will preserve new lines for us without having to
-explicitly place them in:
+**模板字面量** 中可以直接换行，而无需使用转义的换行符号：
 
 ```javascript
 let text = ( `cat
@@ -295,21 +292,20 @@ nickelodeon`
 );
 ```
 
-**Template Literals** can accept expressions, as well:
+**模板字面量** 中可以接受表达式：
 
 ```javascript
 let today = new Date();
 let text = `The time and date is ${today.toLocaleString()}`;
 ```
 
-<sup>[(back to table of contents)](#table-of-contents)</sup>
+<sup>[(回到目录)](#目录)</sup>
 
 ## Destructuring
 
-Destructuring allows us to extract values from arrays and objects (even deeply
-nested) and store them in variables with a more convenient syntax.
+解构允许我们从数组和对象（甚至是深度嵌套）中提取数值，并以更方便的语法将它们存储在变量中。
 
-### Destructuring Arrays
+### Destructuring Arrays 解构数组
 
 ```javascript
 var arr = [1, 2, 3, 4];
@@ -326,7 +322,7 @@ console.log(a); // 1
 console.log(b); // 2
 ```
 
-### Destructuring Objects
+### Destructuring Objects 解构对象
 
 ```javascript
 var luke = { occupation: 'jedi', father: 'anakin' };
@@ -342,14 +338,12 @@ console.log(occupation); // 'jedi'
 console.log(father); // 'anakin'
 ```
 
-<sup>[(back to table of contents)](#table-of-contents)</sup>
+<sup>[(回到目录)](#目录)</sup>
 
 ## Modules
 
-Prior to ES6, we used libraries such as [Browserify](http://browserify.org/)
-to create modules on the client-side, and [require](https://nodejs.org/api/modules.html#modules_module_require_id)
-in **Node.js**. With ES6, we can now directly use modules of all types
-(AMD and CommonJS).
+在 ES6 之前, 我们使用诸如 [Browserify](http://browserify.org/)
+之类的库在客户端建立模块，使用 [require](https://nodejs.org/api/modules.html#modules_module_require_id)在 **Node.js**中建立. 在 ES6 中, 我们现在可以直接使用AMD 和 CommonJS这些模块了。
 
 ### Exporting in CommonJS
 
@@ -362,15 +356,14 @@ module.exports = function bar () {};
 
 ### Exporting in ES6
 
-With ES6, we have various flavors of exporting. We can perform
-**Named Exports**:
+ES6 中，我们有各种不同的导出方式。我们可以使用 **变量名导出** ：
 
 ```javascript
 export let name = 'David';
 export let age  = 25;​​
 ```
 
-As well as **exporting a list** of objects:
+还可以导出一个对象的列表：
 
 ```javascript
 function sumTwo(a, b) {
@@ -384,7 +377,7 @@ function sumThree(a, b, c) {
 export { sumTwo, sumThree };
 ```
 
-We can also export functions, objects and values (etc.) simply by using the `export` keyword:
+我们还可以通过使用`export`关键字来导出函数、对象和值（等等）：
 
 ```javascript
 export function sumTwo(a, b) {
@@ -396,7 +389,7 @@ export function sumThree(a, b, c) {
 }
 ```
 
-And lastly, we can **export default bindings**:
+最后，我们可以导出 **默认值** 。
 
 ```javascript
 function sumTwo(a, b) {
@@ -419,31 +412,25 @@ export default api;
  */
 ```
 
-> **Best Practices**: Always use the `export default` method at **the end** of
-the module. It makes it clear what is being exported, and saves time by having
-to figure out what name a value was exported as. More so, the common practice
-in CommonJS modules is to export a single value or object. By sticking to this
-paradigm, we make our code easily readable and allow ourselves to interpolate
-between CommonJS and ES6 modules.
+> **最佳时间**: 总是在模块的 最后 使用`export default`方法。它使人们清楚地知道被导出的内容，并节省了寻找模块导出值的时间。更多的是，CommonJS模块的常见做法是导出一个单一的值或对象。通过坚持这种规范，我们的代码会更加易于阅读，并更加容易在CommonJS和ES6模块之间进行切换。
 
 ### Importing in ES6
 
-ES6 provides us with various flavors of importing. We can import an entire file:
+ES6为我们提供了各种类型的导入方式。我们可以导入整个文件：
 
 ```javascript
 import 'underscore';
 ```
 
-> It is important to note that simply **importing an entire file will execute
-all code at the top level of that file**.
+> 值得注意的是，简单地**导入整个文件将执行该文件顶层的所有代码。**
 
-Similar to Python, we have named imports:
+与Python类似，我们可以通过模块的名称引用：
 
 ```javascript
 import { sumTwo, sumThree } from 'math/addition';
 ```
 
-We can also rename the named imports:
+我们也可以使用`as`重命名这些引入的模块：
 
 ```javascript
 import {
@@ -452,13 +439,13 @@ import {
 } from 'math/addition';
 ```
 
-In addition, we can **import all the things** (also called namespace import):
+此外，我们也可以 **引入所有东西** （也叫命名空间导入）
 
 ```javascript
 import * as util from 'math/addition';
 ```
 
-Lastly, we can import a list of values from a module:
+最后，我们可以从一个模块的多个值中引入列表：
 
 ```javascript
 import * as additionUtil from 'math/addition';
