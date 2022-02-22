@@ -340,7 +340,7 @@ console.log(father); // 'anakin'
 
 <sup>[(回到目录)](#目录)</sup>
 
-## Modules
+## Modules **TO FIX
 
 在 ES6 之前, 我们使用诸如 [Browserify](http://browserify.org/)
 之类的库在客户端建立模块，使用 [require](https://nodejs.org/api/modules.html#modules_module_require_id)在 **Node.js**中建立. 在 ES6 中, 我们现在可以直接使用AMD 和 CommonJS这些模块了。
@@ -389,7 +389,7 @@ export function sumThree(a, b, c) {
 }
 ```
 
-最后，我们可以导出 **默认值** 。
+最后，我们可以导出 **默认导出对象** 。
 
 ```javascript
 function sumTwo(a, b) {
@@ -422,7 +422,7 @@ ES6为我们提供了各种类型的导入方式。我们可以导入整个文�
 import 'underscore';
 ```
 
-> 值得注意的是，简单地**导入整个文件将执行该文件顶层的所有代码。**
+> 值得注意的是，简单地**导入整个文件将在文件顶层执行被导入文件所有代码。** ？？
 
 与Python类似，我们可以通过模块的名称引用：
 
@@ -439,59 +439,55 @@ import {
 } from 'math/addition';
 ```
 
-此外，我们也可以 **引入所有东西** （也叫命名空间导入）
+此外，我们也可以 **引入全部内容** （也叫命名空间导入）
 
 ```javascript
 import * as util from 'math/addition';
 ```
 
-最后，我们可以从一个模块的多个值中引入列表：
+最后，我们可以从一个模块中引入多个值：
 
 ```javascript
 import * as additionUtil from 'math/addition';
 const { sumTwo, sumThree } = additionUtil;
 ```
 
-Importing from the default binding like this:
+像这样引入默认的到处对象：
 
 ```javascript
 import api from 'math/addition';
 // Same as: import { default as api } from 'math/addition';
 ```
 
-While it is better to keep the exports simple, but we can sometimes mix default import and mixed import if needed.
-When we are exporting like this:
+虽然最好保持简单的导出，但如果需要，我们有时可以混合默认引用和命名引用。当我们像这样导出时：
 
 ```javascript
 // foos.js
 export { foo as default, foo1, foo2 };
 ```
 
-We can import them like the following:
+我们可以这样引用模块的值：
 
 ```javascript
 import foo, { foo1, foo2 } from 'foos';
 ```
 
-When importing a module exported using commonjs syntax (such as React) we can do:
+当引入commonjs模块，如React时：
 
 ```javascript
 import React from 'react';
 const { Component, PropTypes } = React;
 ```
 
-This can also be simplified further, using:
+更简单的版本：
 
 ```javascript
 import React, { Component, PropTypes } from 'react';
 ```
 
-> **Note**: Values that are exported are **bindings**, not references.
-Therefore, changing the binding of a variable in one module will affect the
-value within the exported module. Avoid changing the public interface of these
-exported values.
+> **注意**: 被导出的值是绑定的，而不是引用 Values that are exported are **bindings**, not references.因此，避免修改这些公共接口的导出值，因为更改一个模块中的值的绑定将影响到其他引用到这个值的地方。
 
-<sup>[(back to table of contents)](#table-of-contents)</sup>
+<sup>[(回到目录)](#目录)</sup>
 
 ## Parameters
 
