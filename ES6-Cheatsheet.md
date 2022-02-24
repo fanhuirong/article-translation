@@ -14,7 +14,7 @@
 - [字符串](#strings)
 - [解构](#destructuring)
 - [Modules](#modules)
-- [Parameters](#parameters)
+- [参数](#parameters)
 - [Classes](#classes)
 - [Symbols](#symbols)
 - [Maps](#maps)
@@ -491,9 +491,7 @@ import React, { Component, PropTypes } from 'react';
 
 ## Parameters
 
-In ES5, we had varying ways to handle functions which needed **default values**,
-**indefinite arguments**, and **named parameters**. With ES6, we can accomplish
-all of this and more using more concise syntax.
+在ES5中，我们有不同的方法来处理那些需要**默认参数**、**不确定数量的参数**和**命名参数**的函数。在ES6中，我们可以使用更简洁的语法来完成这些。
 
 ### Default Parameters
 
@@ -505,7 +503,7 @@ function addTwoNumbers(x, y) {
 }
 ```
 
-In ES6, we can simply supply default values for parameters in a function:
+在ES6中，我们可以简单地为函数参数启用默认值：
 
 ```javascript
 function addTwoNumbers(x=0, y=0) {
@@ -519,9 +517,9 @@ addTwoNumbers(2); // 2
 addTwoNumbers(); // 0
 ```
 
-### Rest Parameters
+### Rest Parameters 剩余参数
 
-In ES5, we handled an indefinite number of arguments like so:
+在ES5中，我们是这样处理不确定数量的参数的：
 
 ```javascript
 function logArguments() {
@@ -531,7 +529,7 @@ function logArguments() {
 }
 ```
 
-Using the **rest** operator, we can pass in an indefinite amount of arguments:
+使用`...`操作符，我们可以传入无限数量的参数：
 
 ```javascript
 function logArguments(...args) {
@@ -543,8 +541,7 @@ function logArguments(...args) {
 
 ### Named Parameters
 
-One of the patterns in ES5 to handle named parameters was to use the **options
-object** pattern, adopted from jQuery.
+ES5中处理多个命名参数的方法之一是传入一个`对象`的模式，这是jQuery中采用的方法。
 
 ```javascript
 function initializeCanvas(options) {
@@ -554,8 +551,7 @@ function initializeCanvas(options) {
 }
 ```
 
-We can achieve the same functionality using destructuring as a formal parameter
-to a function:
+我们可以使用`解构`来实现同样的功能。
 
 ```javascript
 function initializeCanvas(
@@ -564,8 +560,7 @@ function initializeCanvas(
     }
 ```
 
-If we want to make the entire value optional, we can do so by destructuring an
-empty object:
+如果我们想让所有参数值都是`可选的`，我们可以通过**解构一个空对象**来实现。
 
 ```javascript
 function initializeCanvas(
@@ -574,34 +569,32 @@ function initializeCanvas(
     }
 ```
 
-### Spread Operator
+### Spread Operator 展开操作符
 
-In ES5, we could find the max of values in an array by using the `apply` method on `Math.max` like this:
+在ES5中，我们可以通过使用`Math.max`的`apply`方法找到数组中数值的最大值，如下所示：
 
 ```javascript
 Math.max.apply(null, [-1, 100, 9001, -32]); // 9001
 ```
 
-In ES6, we can now use the spread operator to pass an array of values to be used as
-parameters to a function:
+在ES6中，我们现在可以使用`展开操作符`来传递一个数组的值，把他们作为函数的参数传入。
 
 ```javascript
 Math.max(...[-1, 100, 9001, -32]); // 9001
 ```
 
-We can concat array literals easily with this intuitive syntax:
+我们可以用这种直观的语法轻松地连接多个数组。
 
 ```javascript
 let cities = ['San Francisco', 'Los Angeles'];
 let places = ['Miami', ...cities, 'Chicago']; // ['Miami', 'San Francisco', 'Los Angeles', 'Chicago']
 ```
 
-<sup>[(back to table of contents)](#table-of-contents)</sup>
+<sup>[(回到目录)](#目录)</sup>
 
 ## Classes
 
-Prior to ES6, we implemented Classes by creating a constructor function and
-adding properties by extending the prototype:
+在ES6之前，我们通过创建一个构造函数来实现（implement）类，并通过扩展（extend）原型添加属性。
 
 ```javascript
 function Person(name, age, gender) {
@@ -615,7 +608,7 @@ Person.prototype.incrementAge = function () {
 };
 ```
 
-And created extended classes by the following:
+并通过以下方式创建继承了父类属性的子类：
 
 ```javascript
 function Personal(name, age, gender, occupation, hobby) {
@@ -633,8 +626,7 @@ Personal.prototype.incrementAge = function () {
 };
 ```
 
-ES6 provides much needed syntactic sugar for doing this under the hood. We can
-create Classes directly:
+ES6提供了一些语法糖来实现这些功能，我们可以直接创建类：
 
 ```javascript
 class Person {
@@ -650,7 +642,7 @@ class Person {
 }
 ```
 
-And extend them using the `extends` keyword:
+并使用**extends**关键字来实现继承父类的子类。
 
 ```javascript
 class Personal extends Person {
@@ -668,24 +660,17 @@ class Personal extends Person {
 }
 ```
 
-> **Best Practice**: While the syntax for creating classes in ES6 obscures how
-implementation and prototypes work under the hood, it is a good feature for
-beginners and allows us to write cleaner code.
+> **最佳实践**: 虽然在ES6中创建类的语法掩盖了实现和原型的工作原理，但对于初学者来说，这是一个很好的功能，使我们能够写出更干净的代码。
 
-<sup>[(back to table of contents)](#table-of-contents)</sup>
+<sup>[(回到目录)](#目录)</sup>
 
 ## Symbols
 
-Symbols have existed prior to ES6, but now we have a public interface to using
-them directly. Symbols are immutable and unique and can be used as keys in any hash.
+`Symbols`在ES6之前就已经存在了，但现在我们有一个公共接口来直接使用它们。`Symbols`是不可变的（immutable）、唯一的（unique），可以在任何`hash`中作为键使用。
 
 ### Symbol( )
 
-Calling `Symbol()` or `Symbol(description)` will create a unique symbol that cannot be looked up
-globally. A Use case for `Symbol()` is to patch objects or namespaces from third parties with your own
-logic, but be confident that you won't collide with updates to that library. For example,
-if you wanted to add a method `refreshComponent` to the `React.Component` class, and be certain that
-you didn't trample a method they add in a later update:
+`Symbol()`的一个用例：如果你想用自己的逻辑给第三方库的对象或命名空间打补丁的时候，同时你不想和第三方的库未来的更新发生冲突。例如，如果你想给`React.Component`类添加一个方法`refreshComponent`，但又确定不了这个方法会不会在下个版本中加入，你可以这么做：
 
 ```javascript
 const refreshComponent = Symbol();
@@ -697,9 +682,9 @@ React.Component.prototype[refreshComponent] = () => {
 
 ### Symbol.for(key)
 
-`Symbol.for(key)` will create a Symbol that is still immutable and unique, but can be looked up globally.
-Two identical calls to `Symbol.for(key)` will return the same Symbol instance. NOTE: This is not true for
-`Symbol(description)`:
+`Symbol.for(key)`将创建一个`Symbol`，它仍然是`不可改变`的和`唯一的`，但可以在全局范围内被查询。对`Symbol.for(key)`的两次相同的调用将返回相同的`Symbol`实例。
+
+注意：这不适用于`Symbol(description)`。
 
 ```javascript
 Symbol('foo') === Symbol('foo') // false
@@ -707,9 +692,7 @@ Symbol.for('foo') === Symbol('foo') // false
 Symbol.for('foo') === Symbol.for('foo') // true
 ```
 
-A common use case for Symbols, and in particular with `Symbol.for(key)` is for interoperability. This can be
-achieved by having your code look for a Symbol member on object arguments from third parties that contain some
-known interface. For example:
+`Symbols`的一个常见用例，特别是`Symbol.for(key)`，是为了实现互操作性。这可以通过让你的代码在包含一些已知接口的第三方的对象参数上寻找一个Symbol成员来实现（This can be achieved by having your code look for a Symbol member on object arguments from third parties that contain some known interface.）。比如说：
 
 ```javascript
 function reader(obj) {
@@ -723,7 +706,7 @@ function reader(obj) {
 }
 ```
 
-And then in another library:
+随后在其他库中：
 
 ```javascript
 const specialRead = Symbol.for('specialRead');
@@ -736,16 +719,13 @@ class SomeReadableType {
 }
 ```
 
-> A notable example of Symbol use for interoperability is `Symbol.iterator` which exists on all iterable
-types in ES6: Arrays, strings, generators, etc. When called as a method it returns an object with an Iterator
-interface.
+`Symbol`用于互操作性的一个显著例子是`Symbol.iterator`，它存在于ES6的所有`可迭代类型`中：数组、字符串、生成器等。当作为一个方法调用时，它返回一个具有迭代器接口的对象。
 
-<sup>[(back to table of contents)](#table-of-contents)</sup>
+<sup>[(回到目录)](#目录)</sup>
 
 ## Maps
 
-**Maps** is a much needed data structure in JavaScript. Prior to ES6, we created
-**hash** maps through objects:
+`Maps`是JavaScript中非常需要的一种数据结构。在ES6之前，我们通过对象创建**hash maps** 。
 
 ```javascript
 var map = new Object();
@@ -753,15 +733,14 @@ map[key1] = 'value1';
 map[key2] = 'value2';
 ```
 
-However, this does not protect us from accidentally overriding functions with
-specific property names:
+然而，这并不能阻止函数被带有特定属性名称的函数被意外覆盖的情况发生。
 
 ```javascript
 > getOwnProperty({ hasOwnProperty: 'Hah, overwritten'}, 'Pwned');
 > TypeError: Property 'hasOwnProperty' is not a function
 ```
 
-Actual **Maps** allow us to `set`, `get` and `search` for values (and much more).
+实际 **Maps** 允许我们`set`, `get` 和 `search`（以及更多）。
 
 ```javascript
 let map = new Map();
@@ -770,9 +749,7 @@ let map = new Map();
 > map.has('name'); // true
 ```
 
-The most amazing part of Maps is that we are no longer limited to just using
-strings. We can now use any type as a key, and it will not be type-cast to
-a string.
+`Maps`最神奇的地方在于我们不再局限于只使用字符串作为 `key`。我们现在可以使用任何类型的键，而且它不会被类型转换为字符串。
 
 ```javascript
 let map = new Map([
@@ -789,11 +766,9 @@ for (let key of map.keys()) {
 }
 ```
 
-> **Note**: Using non-primitive values such as functions or objects won't work
-when testing equality using methods such as `map.get()`. As such, stick to
-primitive values such as Strings, Booleans and Numbers.
+>**提示**：当使用 `map.get()` 判断值是否相等时，非基础类型比如一个函数或者对象，将不会正常工作。 有鉴于此，还是建议使用字符串，布尔和数字类型的数据类型作为`key`。
 
-We can also iterate over maps using `.entries()`:
+我们还可以用`. entries()`来迭代 `maps`
 
 ```javascript
 for (let [key, value] of map.entries()) {
@@ -801,12 +776,11 @@ for (let [key, value] of map.entries()) {
 }
 ```
 
-<sup>[(back to table of contents)](#table-of-contents)</sup>
+<sup>[(回到目录)](#目录)</sup>
 
 ## WeakMaps
 
-In order to store private data versions < ES6, we had various ways of doing this.
-One such method was using naming conventions:
+在ES6之前的版本，为了存储**私有数据**，有好几种方法，其中一个是使用这种下划线命名约定：
 
 ```javascript
 class Person {
@@ -820,8 +794,7 @@ class Person {
 }
 ```
 
-But naming conventions can cause confusion in a codebase and are not always
-going to be upheld. Instead, we can use WeakMaps to store our values:
+使用下划线命名可能会在代码库中造成混乱，而且不一定会被遵守。相反，我们可以使用`WeakMaps`来存储我们的私有值。
 
 ```javascript
 let _age = new WeakMap();
@@ -840,9 +813,7 @@ class Person {
 }
 ```
 
-The cool thing about using WeakMaps to store our private data is that their
-keys do not give away the property names, which can be seen by using
-`Reflect.ownKeys()`:
+使用WeakMaps来保存我们私有数据的理由之一是不会暴露出属性名，就像下面的例子中的 `Reflect.ownKeys()`
 
 ```javascript
 > const person = new Person(50);
@@ -850,8 +821,7 @@ keys do not give away the property names, which can be seen by using
 > Reflect.ownKeys(person); // []
 ```
 
-A more practical example of using WeakMaps is to store data which is associated
-to a DOM element without having to pollute the DOM itself:
+使用`WeakMaps`的一个更实际的例子是存储与DOM元素相关的数据，而不需要污染DOM本身。
 
 ```javascript
 let map = new WeakMap();
@@ -870,16 +840,9 @@ el = null;
 // map is empty, since the element is destroyed
 ```
 
-As shown above, once the object is destroyed by the garbage collector,
-the WeakMap will automatically remove the key-value pair which was identified
-by that object.
+如上所示，一旦该对象被垃圾收集器销毁，`WeakMap`将自动删除该对象的键值对。
 
-> **Note**: To further illustrate the usefulness of this example, consider how
-jQuery stores a cache of objects corresponding to DOM elements which have
-references. Using WeakMaps, jQuery can automatically free up any memory that
-was associated with a particular DOM element once it has been removed from the
-document. In general, WeakMaps are very useful for any library that wraps DOM
-elements.
+> **注意**：为了进一步说明这个例子的用处，请考虑jQuery是如何缓存存储一个带有引用的DOM元素。使用WeakMaps，一旦被缓存的元素从文档中删除，jQuery可以自动释放任何相关的内存。在一般情况下，如果库的内容涉及DOM元素的缓存，使用WeakMaps是非常有用的。
 
 <sup>[(back to table of contents)](#table-of-contents)</sup>
 
