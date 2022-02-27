@@ -990,9 +990,7 @@ function request(url) {
 }
 ```
 
-And we write a function which will step through our generator using `next` which in turn will utilize our
-`request` method above to yield a Promise:
-我们写一个使用`next`遍历我们生成器的函数，而这又将利用我们上面的请求方法来产生一个新的Promise。
+我们写一个使用`next`遍历我们生成器的函数，再利用我们上面的`request` 方法来产生一个新的Promise。
 
 ```javascript
 function iterateGenerator(gen) {
@@ -1006,8 +1004,7 @@ function iterateGenerator(gen) {
 }
 ```
 
-By augmenting our Generator with Promises, we have a clear way of propagating errors through the use of our
-Promise `.catch` and `reject`. To use our newly augmented Generator, it is as simple as before:
+通过用`Promises`来增强我们的生成器，我们有一个明确的方法来通过使用Promise的`.catch`和`reject`来捕获错误。要使用我们新增强的生成器，和之前一样简单。
 
 ```javascript
 iterateGenerator(function* getData() {
@@ -1018,17 +1015,13 @@ iterateGenerator(function* getData() {
 });
 ```
 
-We were able to reuse our implementation to use our Generator as before, which shows their power. While Generators
-and Promises allow us to write asynchronous code in a synchronous manner while retaining the ability to propagate
-errors in a nice way, we can actually begin to utilize a simpler construction that provides the same benefits:
-[async-await](https://github.com/DrkSephy/es6-cheatsheet#async-await).
+使用生成器后，我们能够像以前一样重用我们的实现。虽然生成器和`Promise`允许我们以同步的方式编写异步代码，同时保留了以漂亮的方式捕获错误的能力，但实际上我们可以开始利用一个提供同样的好处的更简单的结构，：`async-await`。
 
-<sup>[(back to table of contents)](#table-of-contents)</sup>
+<sup>[(回到目录)](#目录)</sup>
 
 ## Async Await
 
-While this is actually an upcoming ES2016 feature, `async await` allows us to perform the same thing we accomplished
-using Generators and Promises with less effort:
+虽然这实际上是一个即将到来的ES7里面的功能，但`async await`允许我们以更少的努力来执行我们使用生成器和Promise完成的同样的事情。
 
 ```javascript
 var request = require('request');
@@ -1049,14 +1042,13 @@ async function main() {
 main();
 ```
 
-Under the hood, it performs similarly to Generators. I highly recommend using them over Generators + Promises. A great resource
-for getting up and running with ES7 and Babel can be found [here](http://masnun.com/2015/11/11/using-es7-asyncawait-today-with-babel.html).
+它的性能与生成器相似。我强烈建议使用它们而不是生成器+Promise。在[这里](http://masnun.com/2015/11/11/using-es7-asyncawait-today-with-babel.html)可以找到一个使用ES7和Babel的资源.
 
-<sup>[(back to table of contents)](#table-of-contents)</sup>
+<sup>[(回到目录)](#目录)</sup>
 
 ## Getter and setter functions
 
-ES6 has started supporting getter and setter functions within classes. Using the following example:
+ES6已经开始支持类里面的`getter`和`setter`函数。
 
 ```javascript
 class Employee {
@@ -1096,7 +1088,7 @@ emp.name = "Bond 007";
 console.log(emp.name);  // Mr. BOND 007  
 ```
 
-Latest browsers are also supporting getter/setter functions in Objects and we can use them for computed properties, adding listeners and preprocessing before setting/getting:
+最新的浏览器也支持Objects中的`getter/setter`函数，我们可以用它们来计算属性、添加监听器和在设置/获取之前进行预处理。
 
 ```javascript
 var person = {
@@ -1119,7 +1111,7 @@ person.fullName = 'Bond 007';
 person.fullName; // Bond 007
 ```
 
-<sup>[(back to table of contents)](#table-of-contents)</sup>
+<sup>[(回到目录)](#目录)</sup>
 
 ## License
 
