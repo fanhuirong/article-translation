@@ -844,11 +844,11 @@ el = null;
 
 > **注意**：为了进一步说明这个例子的用处，请考虑jQuery是如何缓存存储一个带有引用的DOM元素。使用WeakMaps，一旦被缓存的元素从文档中删除，jQuery可以自动释放任何相关的内存。在一般情况下，如果库的内容涉及DOM元素的缓存，使用WeakMaps是非常有用的。
 
-<sup>[(back to table of contents)](#table-of-contents)</sup>
+<sup>[(回到目录)](#目录)</sup>
 
 ## Promises
 
-Promises allow us to turn our horizontal code (callback hell):
+`Promises`让我们把造成回调地狱的代码
 
 ```javascript
 func1(function (value1) {
@@ -864,7 +864,7 @@ func1(function (value1) {
 });
 ```
 
-Into vertical code:
+写成垂直的链式调用代码：
 
 ```javascript
 func1(value1)
@@ -876,8 +876,8 @@ func1(value1)
     });
 ```
 
-Prior to ES6, we used [bluebird](https://github.com/petkaantonov/bluebird) or
-[Q](https://github.com/kriskowal/q). Now we have Promises natively:
+在ES6之前，我们使用[bluebird](https://github.com/petkaantonov/bluebird) 或者
+[Q](https://github.com/kriskowal/q)，现在我们有了原生的`Promises`。
 
 ```javascript
 new Promise((resolve, reject) =>
@@ -885,15 +885,11 @@ new Promise((resolve, reject) =>
         .catch(reason => console.log(reason));
 ```
 
-Where we have two handlers, **resolve** (a function called when the Promise is
-**fulfilled**) and **reject** (a function called when the Promise is **rejected**).
+在这里，我们有两个处理程序，`resolve`（当Promise被完成时调用的一个函数）和`reject`（当Promise被拒绝时调用的一个函数）。
 
-> **Benefits of Promises**: Error Handling using a bunch of nested callbacks
-can get chaotic. Using Promises, we have a clear path to bubbling errors up
-and handling them appropriately. Moreover, the value of a Promise after it has
-been resolved/rejected is immutable - it will never change.
+> **最佳实践**: 错误处理函数如果使用一堆嵌套回调函数就会变得很混乱难以阅读。使用 `Promise`我们将会有一个清晰的路径来将错误冒泡出来，并适当地处理它们。此外，`Promise`在它被`resolve`/`reject`后都是不可改变的。
 
-Here is a practical example of using Promises:
+下面是一个使用`Promise`的实际例子：
 
 ```javascript
 var request = require('request');
@@ -909,8 +905,7 @@ return new Promise((resolve, reject) => {
 });
 ```
 
-We can also **parallelize** Promises to handle an array of asynchronous
-operations by using `Promise.all()`:
+我们还可以通过使用`Promise.all()`来`并行化`处理一个异步操作的数组。
 
 ```javascript
 let urls = [
@@ -937,17 +932,13 @@ Promise.all(promises)
  });
 ```
 
-<sup>[(back to table of contents)](#table-of-contents)</sup>
+<sup>[(回到目录)](#目录)</sup>
 
 ## Generators
 
-Similar to how [Promises](https://github.com/DrkSephy/es6-cheatsheet#promises) allow us to avoid
-[callback hell](http://callbackhell.com/), Generators allow us to flatten our code - giving our
-asynchronous code a synchronous feel. Generators are essentially functions which we can
-[pause their execution](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield)
-and subsequently return the value of an expression.
+类似于[Promises](https://github.com/DrkSephy/es6-cheatsheet#promises) 允许我们避免回调地狱（[callback hell](http://callbackhell.com/)），生成器（Generators）允许我们扁平化我们的代码--让异步代码给我们一种同步的感觉。生成器本质上是一种函数，我们可以暂停其执行，并随后返回表达式的值。
 
-A simple example of using generators is shown below:
+使用生成器的一个简单例子如下所示：
 
 ```javascript
 function* sillyGenerator() {
@@ -964,9 +955,7 @@ var generator = sillyGenerator();
 > console.log(generator.next()); // { value: 4, done: false }
 ```
 
-Where [next](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator/next)
-will allow us to push our generator forward and evaluate a new expression. While the above example is extremely
-contrived, we can utilize Generators to write asynchronous code in a synchronous manner:
+[next](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator/next)将允许我们将我们的生成器向前推，并执行新的表达式。虽然上面的例子是非常刻意的，但我们可以利用生成器以同步的方式来编写异步代码。
 
 ```javascript
 // Hiding asynchronousity with Generators
@@ -978,7 +967,7 @@ function request(url) {
 }
 ```
 
-And here we write a generator function that will return our data:
+我们写一个生成器函数，函数将返回我们的数据。
 
 ```javascript
 function* getData() {
@@ -989,11 +978,9 @@ function* getData() {
 }
 ```
 
-By the power of `yield`, we are guaranteed that `entry1` will have the data needed to be parsed and stored
-in `data1`.
+通过`yield`的力量，我们可以保证`entry1`会有需要解析的数据，并存储在`data1`中。
 
-While generators allow us to write asynchronous code in a synchronous manner, there is no clear
-and easy path for error propagation. As such, as we can augment our generator with Promises:
+虽然生成器允许我们以同步的方式编写异步代码，但没有明确和简单的错误处理逻辑。因此，由于我们可以用Promises来增强我们的生成器。
 
 ```javascript
 function request(url) {
@@ -1005,6 +992,7 @@ function request(url) {
 
 And we write a function which will step through our generator using `next` which in turn will utilize our
 `request` method above to yield a Promise:
+我们写一个使用`next`遍历我们生成器的函数，而这又将利用我们上面的请求方法来产生一个新的Promise。
 
 ```javascript
 function iterateGenerator(gen) {
