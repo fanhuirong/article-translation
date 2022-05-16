@@ -6,3 +6,7 @@
 2. [译】写给TS泛型多次从入门到放弃的人的泛型入门教程](/TypeScript-Generics-for-People-Who-Gave-Up-on-Understanding-Generics.md)
 
 3. [ES6日常工作实用技巧手册](/ES6-Cheatsheet.md)
+
+
+# TODO
+[Use ternaries rather than && in JSX](https://kentcdodds.com/blog/use-ternaries-rather-than-and-and-in-jsx)
