@@ -10,3 +10,4 @@
 
 # TODO
 [Use ternaries rather than && in JSX](https://kentcdodds.com/blog/use-ternaries-rather-than-and-and-in-jsx)
+[An Introduction to GraphQL](https://www.taniarascia.com/introduction-to-graphql/)
