@@ -2,7 +2,7 @@
 ## 目录
 
 - [Quick Start](#QuickStart)
-- [- Think in React](#Think in React)
+- [Think in React](#Think-in-React)
 - [Describing UI](#Describing-UI)
 
 ## QuickStart
@@ -23,7 +23,7 @@
   *  只能在组件的顶层调用，想在循环or条件中使需要提取一个新组件。
 7. sharing data
   * lifting state up 从而在组件间共享
-### Think in React
+### Think-in-React
 1. step1 UI to Component
 2. build static version
   * 使用 props 传递数据（**！不要用state** ）
