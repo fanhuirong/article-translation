@@ -1,5 +1,11 @@
 
-## Quick Start
+## 目录
+
+- [Quick Start](#QuickStart)
+- [- Think in React](#Think in React)
+- [Describing UI](#Describing-UI)
+
+## QuickStart
 1. React 组件名必须大写， HTML 标签必须小写。
 2. conditional rendering 
   * `if...else` 
@@ -29,7 +35,7 @@
 
 * **one-way data flow** 单向数据流
 
-## describing ui
+## Describing-UI
 ### 1. first component
 * ui 库: `chakra ui` & `material ui`
 * react组件是常规 js 函数，但名称必须首字母 **大写** ，否则无法生效。
