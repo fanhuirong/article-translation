@@ -8,3 +8,7 @@
 3. [ES6日常工作实用技巧手册](/ES6-Cheatsheet.md)
 
 4. [React Beta 文档笔记](/React-Doc-Note.md)
+
+# TODO
+[Use ternaries rather than && in JSX](https://kentcdodds.com/blog/use-ternaries-rather-than-and-and-in-jsx)
+[An Introduction to GraphQL](https://www.taniarascia.com/introduction-to-graphql/)
