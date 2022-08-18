@@ -2,8 +2,18 @@
 ## 目录
 
 - [Quick Start](#QuickStart)
-- [Think in React](#Think-in-React)
+  - [Think in React](#Think-in-React)
 - [Describing UI](#Describing-UI)
+  - [First Component](#First-Component)
+  - [Import & Export](#Import&Export)
+  - [Writing-Markup-With-Jsx](#Writing-Markup-With-Jsx)
+  - [Curly-Braces](#Curly-Braces)
+  - [Pass-Props-To-Component](#Pass-Props-To-Component)
+  - [Conditional-Rendering](#Conditional-Rendering)
+  - [Render-List](#Render-List)
+  - [Keeping-Components-Pure](#Keeping-Components-Pure)
+  
+
 
 ## QuickStart
 1. React 组件名必须大写， HTML 标签必须小写。
@@ -36,10 +46,11 @@
 * **one-way data flow** 单向数据流
 
 ## Describing-UI
-### 1. first component
+### 1. First Component
+
 * ui 库: `chakra ui` & `material ui`
 * react组件是常规 js 函数，但名称必须首字母 **大写** ，否则无法生效。
-### 2. import & export
+### 2. Import&Export
 1. `./xx.js` or `./xx` 都可以生效
 2. default vs named exports
   一个文件只能有1个 default dexport，但是可以有多个 named exports
@@ -50,7 +61,7 @@
 |  Default | `export default function Button() {}`  | `import Button from './button.js';`  |
 |  Named | `export function Button() {}`  |  `import { Button } from './button.js';` |
 
-### 3. writing markup with jsx
+### 3. Writing-Markup-With-Jsx
 *  rules of jsx
   1) return a single root element, 
   `<></>` -- React fragment, 不会在HTML中渲染出标签
@@ -63,9 +74,9 @@
   3) 驼峰写法 camelCase eg：`className` 
   > 由于历史原因， `aria-*` 和 `data-*`  还是按照 HTML 中的写法
 
-### 4.curly braces `{}`
+### 4.Curly-Braces 
 
-### 5. pass props to component
+### 5. Pass-Props-To-Component
 
 1) React 函数组件只接受一个参数，一个 `props` 对象, `{}` 通过解构拿到需要的参数
 
@@ -112,10 +123,10 @@ function Card({ children }) {
 
 >`Don’t try to “change props”.` 当您需要响应用户输入（例如更改所选颜色）时，您将需要 `setState`
 
-### 6. 条件渲染
+### 6. Conditional-Rendering
 1）`&&`: 不要在 && 左边放数字，如果左边是0，那么整个表达式就会得到这个值（0），而且React会呈现0而不是什么都没有
 
-### 7. render list
+### 7. Render-List
   1)  `map`
   2) `filter`
   3) 箭头函数
@@ -142,7 +153,9 @@ function Card({ children }) {
 
 * **组件不会将key作为一个 prop 接收**。它只被React本身作为一个提示使用。如果你的组件需要一个ID，你必须把它作为一个单独的道具来传递。`<Profile key={id} userId={id} />`
 
-### 8. [Keeping Components Pure](https://beta.reactjs.org/learn/keeping-components-pure)
+### 8. Keeping-Components-Pure
+
+[Keeping Components Pure](https://beta.reactjs.org/learn/keeping-components-pure)
 
 * pure function
 1. 做它自己的事。它不改变任何在它被调用之前存在的对象或变量。
