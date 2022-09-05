@@ -12,6 +12,8 @@
   - [Conditional-Rendering](#Conditional-Rendering)
   - [Render-List](#Render-List)
   - [Keeping-Components-Pure](#Keeping-Components-Pure)
+- [Adding Interactivity](#Adding-Interactivity)
+  - [Responding to Events](#Responding-to-Events)
   
 
 
@@ -180,3 +182,90 @@ React假设你写的每个组件都是一个纯函数。这意味着你写的Rea
 * 渲染可以在任何时候发生，所以组件不应该依赖彼此的渲染顺序。
 
 * 您不应更改组件用于渲染的任何输入。这包括 props、state 和 context。要更新screen ，set state 而不是改变预先存在的对象。
+
+## Adding-Interactivity
+
+### Responding-to-Events
+#### event handler
+* 通常被定义在你的**组件内**。
+* 其名称以`handle`开头，后面是事件的名称。
+
+函数必须传入而不是调用。
+Functions passed to event handlers (处理器) must be passed, not called. 
+| passing a function (correct)  | calling a function (incorrect) | 
+|---|---|
+|  `<button onClick={handleClick}>` | `<button onClick={handleClick()}>`｜
+
+在第二个例子中，`handleClick()`末尾的`()`在渲染过程中立即启动了该函数，此时并没有任何点击。这是因为JSX `{`和`}`里面的JavaScript会**立即执行**。
+
+|passing a function (correct) |calling a function (incorrect)|
+|---|---|
+|`<button onClick={() => alert('...')}>` |`<button onClick={alert('...')}> // This alert fires when the component renders, not when clicked!` |
+
+#### event handler props
+按照惯例，`event handler props`应该以`on`开头，后面是一个大写字母。
+```js
+function Toolbar({ onPlayMovie, onUploadImage }) {
+  return (
+    <div>
+      <Button onClick={onPlayMovie}>
+        Play Movie
+      </Button>
+      <Button onClick={onUploadImage}>
+        Upload Image
+      </Button>
+    </div>
+  );
+}
+```
+
+#### Event propagation
+```js
+export default function Toolbar() {
+  return (
+    <div className="Toolbar" onClick={() => {
+      alert('You clicked on the toolbar!');
+    }}>
+      <Button onClick={() => alert('Playing!')}>
+        Play Movie
+      </Button>
+      <Button onClick={() => alert('Uploading!')}>
+        Upload Image
+      </Button>
+    </div>
+  );
+}
+```
+
+>所有的事件都在React中传播，除了onScroll，它只对你附加的JSX标签起作用。
+
+`e.stopPropagation()`
+```js
+function Button({ onClick, children }) {
+  return (
+    <button onClick={e => {
+      e.stopPropagation();
+      onClick();
+    }}>
+      {children}
+    </button>
+  );
+}
+```
+这种模式提供了一个propagation的替代方案。它让子组件处理事件，同时也让父组件指定一些额外的行为。与propagation不同，它不是自动的。但这种模式的好处是，你可以清楚地跟踪作为某个事件的结果而执行的整个链式代码。
+
+#### Preventing default (默认) behavior
+有些浏览器事件有与之相关的默认（default）行为。例如，一个`<form>`提交事件，当它里面的按钮被点击时，会默认**重新加载整个页面**。
+
+`e.preventDefault()`
+
+>`e.stopPropagation()`阻止附加在上述标签上的事件处理程序（处理器）启动。
+
+>`e.preventDefault()`阻止少数有默认行为的事件的浏览器默认行为。
+
+
+
+与渲染函数不同的是，事件处理程序event handler不需要是纯粹pure的，所以它是一个可以改变一些东西的好地方。
+
+
+### State: A Component's Memory
