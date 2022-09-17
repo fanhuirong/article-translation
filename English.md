@@ -1,4 +1,4 @@
-# greeting 
+# section2 greeting 
 
 ## part1 hey,What's up(with you)?
 
@@ -28,11 +28,11 @@ answer as part1
 
 `what's good`
 
-## part7 informal greeting
+## informal greeting
 `hey, what's up?`
 `Not much` /`not a lot` /`nada`/ `nothing`, `xxxx. And you?`
 
-## how are you?  
+## part3 how are you?  
 normal and informal
 
 
@@ -46,7 +46,7 @@ depending on your tone of voice. They may res : what's wrong?/why aren't you goo
 
 
 
-## ending a conversation
+## part4 ending a conversation
 `okay`
 
 okay, but I really need to go know.Tell me later.
@@ -59,8 +59,8 @@ Well I'm a bit busy now. Maybe later?
 
 well I should get going?
 
-## say goodbye
-### informal
+## part5 say goodbye
+ **informal**
 
 `catch you later`(will see you later) 
 A: `you too`
@@ -77,6 +77,22 @@ thanks you too
 
 adios
 
-### formal
+**formal**
 
 `good bye`
+
+# section3 ask question
+
+## What's that?
+1. What's that?
+2. Sorry, what was that?
+3. I didn't catch that
+4. What?(rude)
+5. What does ... mean?
+
+# section4 describe people & introduction
+## name and intro
+1. This is xxx(name)
+2. What's your name
+3. I'm sorry, I forgot your name
+4. I'm sorry, what's your name again
