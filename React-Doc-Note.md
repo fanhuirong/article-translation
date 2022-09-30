@@ -3,17 +3,17 @@
 - [Quick Start](#QuickStart)
   - [Think in React](#Think-in-React)
 - [Describing UI](#Describing-UI)
-  - [First Component](#First-Component)
-  - [Import & Export](#Import&Export)
-  - [Writing-Markup-With-Jsx](#Writing-Markup-With-Jsx)
-  - [Curly-Braces](#Curly-Braces)
-  - [Pass-Props-To-Component](#Pass-Props-To-Component)
-  - [Conditional-Rendering](#Conditional-Rendering)
-  - [Render-List](#Render-List)
-  - [Keeping-Components-Pure](#Keeping-Components-Pure)
+  - [First Component](#1.First-Component)
+  - [Import & Export](#2。Import&Export)
+  - [Writing-Markup-With-Jsx](#3.Writing-Markup-With-Jsx)
+  - [Curly-Braces](#4.Curly-Braces)
+  - [Pass-Props-To-Component](#5.Pass-Props-To-Component)
+  - [Conditional-Rendering](#6.Conditional-Rendering)
+  - [Render-List](#7.Render-List)
+  - [Keeping-Components-Pure](#8.Keeping-Components-Pure)
 - [Adding Interactivity](#Adding-Interactivity)
-  - [Responding to Events](#Responding-to-Events)
-  - [State: A Component's Memory](State-A-Component's-Memory) -[Render and Commit](#Render-And-Commit)
+  - [Responding to Events](#1.Responding-to-Events)
+  - [State: A Component's Memory](State-A-Component's-Memory) -[Render and Commit](#2.Render-And-Commit)
 
 # QuickStart
 
@@ -65,12 +65,12 @@
 
 # Describing-UI
 
-## 1. First Component
+## 1.First Component
 
 - ui 库: `chakra ui` & `material ui`
 - react 组件是常规 js 函数，但名称必须首字母 **大写** ，否则无法生效。
 
-## 2. Import&Export
+## 2.Import&Export
 
 1. `./xx.js` or `./xx` 都可以生效
 2. default vs named exports
@@ -81,7 +81,7 @@
 | Default | `export default function Button() {}` | `import Button from './button.js';`     |
 | Named   | `export function Button() {}`         | `import { Button } from './button.js';` |
 
-## 3. Writing-Markup-With-Jsx
+## 3.Writing-Markup-With-Jsx
 
 - rules of jsx
 
@@ -98,7 +98,7 @@
 
 ## 4.Curly-Braces
 
-## 5. Pass-Props-To-Component
+## 5.Pass-Props-To-Component
 
 1. React 函数组件只接受一个参数，一个 `props` 对象, `{}` 通过解构拿到需要的参数
 
@@ -146,11 +146,11 @@ function Card({ children }) {
 
 > `Don’t try to “change props”.` 当您需要响应用户输入（例如更改所选颜色）时，您将需要 `setState`
 
-## 6. Conditional-Rendering
+## 6.Conditional-Rendering
 
 1）`&&`: 不要在 && 左边放数字，如果左边是 0，那么整个表达式就会得到这个值（0），而且 React 会呈现 0 而不是什么都没有
 
-## 7. Render-List
+## 7.Render-List
 
 1.  `map`
 2.  `filter`
@@ -184,7 +184,7 @@ const listItems = chemists.map((person) => {
 
 - **组件不会将 key 作为一个 prop 接收**。它只被 React 本身作为一个提示使用。如果你的组件需要一个 ID，你必须把它作为一个单独的道具来传递。`<Profile key={id} userId={id} />`
 
-## 8. Keeping-Components-Pure
+## 8.Keeping-Components-Pure
 
 [Keeping Components Pure](https://beta.reactjs.org/learn/keeping-components-pure)
 
@@ -216,7 +216,7 @@ React 假设你写的每个组件都是一个纯函数。这意味着你写的 R
 
 # Adding-Interactivity
 
-## 1. Responding-to-Events
+## 1.Responding-to-Events
 
 #### Event-Handler-(handleXxx)
 
@@ -301,7 +301,7 @@ function Button({ onClick, children }) {
 
 与渲染函数不同的是，事件处理程序 event handler 不需要是纯粹 pure 的，所以它是一个可以改变一些东西的好地方。
 
-## 2. State-A-Component's-Memory
+## 2.State-A-Component's-Memory
 
 1. Local variables don’t persist between renders. 局部变量不会在渲染之间持续存在。
 2. Changes to local variables won’t trigger renders.
